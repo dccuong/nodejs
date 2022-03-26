@@ -8,19 +8,18 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        minLength: 6,
         required: true,
         unique: true
     },
 
     pass: {
-        type: Number,
+        type: String,
         required: true,
     }
 }, { timeseries: true })
 userSchema.methods = {
-    authenticate(password) {
-        return this.password === this.encryptPassword(password)
+    authenticate(pass) {
+        return this.pass === this.encryptPassword(pass)
     },
     encryptPass(pass) {
         if (!pass) return
@@ -32,7 +31,7 @@ userSchema.methods = {
     }
 }
 userSchema.pre("save", function (next) {
-    this.password = this.encryptPassword(this.password)
+    this.pass = this.encryptPassword(this.pass)
     next();
 });
-export default mongoose.model('user', userSchema);
+export default mongoose.model('User', userSchema);

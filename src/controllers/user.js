@@ -1,6 +1,6 @@
 import User from "../models/user"
-export const register = async (req, res) => {
-    const { email, name, password } = req.body;
+export const singup = async (req, res) => {
+    const { email, name, pass } = req.body;
     try {
         const existUser = await User.findOne({ email }).exec();
         if (existUser) {
@@ -8,7 +8,7 @@ export const register = async (req, res) => {
                 message: "Tài khoản đã tồn tại"
             })
         }
-        const user = await new User({ email, name, password }).save();
+        const user = await new User({ email, name, pass }).save();
         res.json({
             user: {
                 _id: user._id,
@@ -23,8 +23,8 @@ export const register = async (req, res) => {
     }
 };
 //register
-export const login = async (req, res) => {
-    const { email, password } = req.body;
+export const signin = async (req, res) => {
+    const { email, pass } = req.body;
     try {
         const user = await User.findOne({ email }).exec();
         if (!user) {
@@ -32,7 +32,7 @@ export const login = async (req, res) => {
                 message: "Email không tồn tại"
             })
         }
-        if (!user.authenticate(password)) {
+        if (!user.authenticate(pass)) {
             res.status(400).json({
                 message: "Mật khẩu không đúng"
             })
