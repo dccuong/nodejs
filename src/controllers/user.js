@@ -1,6 +1,7 @@
 import User from "../models/user"
 export const singup = async (req, res) => {
     const { email, name, pass } = req.body;
+    console.log(email)
     try {
         const existUser = await User.findOne({ email }).exec();
         if (existUser) {
@@ -9,6 +10,7 @@ export const singup = async (req, res) => {
             })
         }
         const user = await new User({ email, name, pass }).save();
+        console.log(user)
         res.json({
             user: {
                 _id: user._id,
