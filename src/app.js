@@ -35,7 +35,7 @@
 import express from 'express';
 import cors from 'cors';
 import productRouter from './routes/product';
-import userRouter from './routes/user';
+import authRouter from './routes/auth';
 import cateRouter from './routes/category'
 import morgan from 'morgan';
 import mongoose from 'mongoose';
@@ -48,7 +48,7 @@ app.use(express.json())
 
 // routes
 app.use("/api", productRouter)
-app.use("/api", userRouter)
+app.use("/api", authRouter)
 app.use("/api", cateRouter)
 //connection db
 mongoose.connect("mongodb://127.0.0.1:27017/we16310")

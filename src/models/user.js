@@ -1,5 +1,6 @@
-import { createHmac } from "crypto";
 import mongoose, { Schema } from "mongoose";
+import { createHmac } from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 
 const userSchema = new Schema({
     email: {
@@ -8,7 +9,7 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    password: {
+    pass: {
         type: String,
         minLength: 6,
         required: true
@@ -17,21 +18,25 @@ const userSchema = new Schema({
         type: String,
         minlength: 6,
         required: true
+    },
+    role: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true });
 userSchema.pre("save", function (next) {
     this.salt = uuidv4();
-    this.password = this.encryptPassword(this.password);
+    this.pass = this.encryptPassword(this.pass);
     next();
 })
 userSchema.methods = {
-    authenticate(password) {
-        return password === this.encryptPassword(password);
+    authenticate(pass) {
+        return pass === this.encryptPassword(passpassword);
     },
-    encryptPassword(password) {
-        if (!password) return
+    encryptPassword(pass) {
+        if (!pass) return
         try {
-            return createHmac("Sha256", this.salt).update(password).digest("hex");
+            return createHmac("Sha256", this.salt).update(pass).digest("hex");
         } catch (error) {
             console.log(error)
         }
