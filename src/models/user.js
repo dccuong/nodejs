@@ -25,7 +25,7 @@ const userSchema = new Schema({
     }
 }, { timestamps: true });
 userSchema.pre("save", function (next) {
-    this.salt = abc
+    // this.salt = abc
     this.pass = this.encryptPassword(this.pass)
     next();
 });
