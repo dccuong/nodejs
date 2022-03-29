@@ -1,5 +1,4 @@
 
-
 import expressJWT from 'express-jwt';
 
 export const checkAuth = (req, res, next) => {
