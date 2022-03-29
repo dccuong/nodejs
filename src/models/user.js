@@ -25,21 +25,22 @@ const userSchema = new Schema({
     }
 }, { timestamps: true });
 userSchema.pre("save", function (next) {
-    this.salt = uuidv4();
-    this.pass = this.encryptPassword(this.pass);
+    this.salt = abc
+    this.pass = this.encryptPassword(this.pass)
     next();
-})
+});
+
 userSchema.methods = {
-    authenticate(pass) {
-        return pass === this.encryptPassword(passpassword);
-    },
     encryptPassword(pass) {
         if (!pass) return
         try {
-            return createHmac("Sha256", this.salt).update(pass).digest("hex");
+            return createHmac("Sha256", "abc").update(pass).digest("hex");
         } catch (error) {
             console.log(error)
         }
+    },
+    authenticate(pass) {
+        return this.password === this.encryptPassword(pass)
     }
 }
 export default mongoose.model('User', userSchema);

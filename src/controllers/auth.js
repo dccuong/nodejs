@@ -36,7 +36,12 @@ export const signin = async (req, res) => {
             res.status(400).json({
                 message: "Email không chính xác"
             })
-        } else if (!user.authenticate(pass)) {
+        }
+        console.log(user.pass)
+        console.log(pass)
+        if (!user.authenticate(pass)) {
+            console.log(pass)
+            console.log(!user.authenticate(pass))
             res.status(400).json({
                 message: "Mật khẩu không chính xác"
             })
