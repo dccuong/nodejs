@@ -11,6 +11,16 @@ export const create = async (req, res) => {
         })
     }
 }
+export const getall = async (req, res) => {
+    try {
+        const category = await Category.find({}).exec();
+        res.json(category);
+    } catch (error) {
+        res.status(400).json({
+            error: "gọi không thành công"
+        })
+    }
+}
 export const read = async (req, res) => {
     const condition = { _id: req.params.id };
     try {
@@ -20,6 +30,8 @@ export const read = async (req, res) => {
             category, products
         });
     } catch (error) {
-
+        res.status(400).json({
+            error: "gọi không thành công"
+        })
     }
 }

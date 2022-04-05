@@ -40,7 +40,9 @@ userSchema.methods = {
         }
     },
     authenticate(pass) {
-        return this.password === this.encryptPassword(pass)
+        console.log('pas' + pass)
+        console.log('pas ma hoa' + this.encryptPassword(pass))
+        return this.pass === this.encryptPassword(pass)
     }
 }
 export default mongoose.model('User', userSchema);

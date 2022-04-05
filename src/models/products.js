@@ -11,10 +11,18 @@ const productShema = new Schema({
         type: Number,
         required: true,
     },
+    img: {
+        type: String,
+        required: true,
+    },
+    desc: {
+        type: String,
+        required: true,
+    },
     category: {
         type: ObjectId,
         ref: "Category"
     }
-}, { timeseries: true })
+}, { timestamps: true })
 
 export default mongoose.model('Product', productShema);
