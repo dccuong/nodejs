@@ -39,16 +39,13 @@ import authRouter from './routes/auth';
 import cateRouter from './routes/category'
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import swaggerUI from 'swagger-ui-express';
-import YAML from 'yamljs';
-
 const app = express();
-const swaggerJSDocs = YAML.load('./api.yaml');
+
 // middleware
 app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.json())
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs))
+
 
 
 // routes
@@ -56,12 +53,12 @@ app.use("/api", productRouter)
 app.use("/api", authRouter)
 app.use("/api", cateRouter)
 //connection db
-mongoose.connect("mongodb://127.0.0.1:27017/we16310")
+mongoose.connect("mongodb://127.0.0.1:27017/we16304")
     .then(() => console.log("kets noi thanh cong"))
     .catch(error => console.log(error))
 
 // connect
-const PORT = 3004;
+const PORT = 3006;
 app.listen(PORT, () => {
     console.log("Server của bạn đang chạy cổng ", PORT);
 });
