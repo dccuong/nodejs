@@ -2,12 +2,11 @@
 import expressJWT from 'express-jwt';
 
 export const checkAuth = (req, res, next) => {
-    const isAdmin = true;
-    // JSON.parse(localStorage.getItem("user")).user.role
-    if (isAdmin) {
+    const isAdmin = JSON.parse(localStorage.getItem("user")).user.role
+    if (isAdmin == 1) {
         next();
     } else {
-        console.log('Chim cút');
+        console.log('out now');
     }
 }
 export const requiredSigin = expressJWT({

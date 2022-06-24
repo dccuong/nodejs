@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 import { createHmac } from 'crypto';
-import { v4 as uuidv4 } from 'uuid';
 
 const userSchema = new Schema({
     email: {
@@ -18,6 +17,9 @@ const userSchema = new Schema({
         type: String,
         minlength: 6,
         required: true
+    }, status: {
+        type: Number,
+        default: 1
     },
     role: {
         type: Number,

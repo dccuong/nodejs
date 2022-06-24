@@ -74,4 +74,38 @@ export const myin4 = async (req, res) => {
             error: "Không tìm được sản phẩm"
         })
     }
+
+}
+export const getall = async (req, res) => {
+    try {
+        const category = await User.find({}).exec();
+        res.json(category);
+    } catch (error) {
+        res.status(400).json({
+            error: "gọi không thành công"
+        })
+    }
+}
+export const update = async (req, res) => {
+    const condition = { _id: req.params.id }
+    const update = req.body;
+    try {
+        const product = await User.findOneAndUpdate(condition, update, { new: true }).exec();
+        res.json(product);
+    } catch (error) {
+        res.status(400).json({
+            error: "Sửa sản phẩm không thành công"
+        })
+    }
+    // const result = data.map(item => item.id == req.params.id ? req.body : item);
+    // res.json(result)
+};
+export const remove = async (req, res) => {
+    try {
+        const user = await User.findOneAndDelete({ _id: req.params.id })
+    } catch (error) {
+        res.status(400).json({
+            error: "ko tim dc"
+        })
+    }
 }

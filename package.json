@@ -21,7 +21,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./src/app.js --exec babel-node -e js -e .yaml"
+    "start": "nodemon ./src/app.js --exec babel-node -e js"
   },
   "repository": {
     "type": "git",

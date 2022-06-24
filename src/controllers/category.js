@@ -1,3 +1,4 @@
+import category from '../models/category';
 import Category from '../models/category';
 import Product from '../models/products';
 
@@ -35,3 +36,29 @@ export const read = async (req, res) => {
         })
     }
 }
+export const update = async (req, res) => {
+    const condition = { _id: req.params.id }
+    const update = req.body;
+    try {
+        const product = await Category.findOneAndUpdate(condition, update, { new: true }).exec();
+        res.json(product);
+    } catch (error) {
+        res.status(400).json({
+            error: "Sửa sản phẩm không thành công"
+        })
+    }
+    // const result = data.map(item => item.id == req.params.id ? req.body : item);
+    // res.json(result)
+};
+export const get = async (req, res) => {
+    try {
+        console.log(req.params.id)
+        const product = await category.findOne({ _id: req.params.id }).exec();
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            error: "Không tìm được sản phẩm"
+        })
+    }
+    // res.json(data.find(item => item.id == req.params.id));
+};

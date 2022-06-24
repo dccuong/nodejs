@@ -53,12 +53,12 @@ app.use("/api", productRouter)
 app.use("/api", authRouter)
 app.use("/api", cateRouter)
 //connection db
-mongoose.connect("mongodb://127.0.0.1:27017/we16304")
+mongoose.connect("mongodb://127.0.0.1:27017/we16310")
     .then(() => console.log("kets noi thanh cong"))
     .catch(error => console.log(error))
 
 // connect
-const PORT = 3006;
+const PORT = 3009;
 app.listen(PORT, () => {
     console.log("Server của bạn đang chạy cổng ", PORT);
 });

@@ -5,7 +5,7 @@ const productShema = new Schema({
         type: String,
         minLength: 6,
         required: true,
-        unique: true
+        // unique: true
     },
     price: {
         type: Number,
@@ -24,5 +24,4 @@ const productShema = new Schema({
         ref: "Category"
     }
 }, { timestamps: true })
-
 export default mongoose.model('Product', productShema);

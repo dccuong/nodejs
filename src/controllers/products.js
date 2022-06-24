@@ -6,13 +6,24 @@
 //     { id: 5, name: "Product A4" },
 //     { id: 2, name: "Product B" }
 // ];
+import { request } from 'express';
 import Product from '../models/products'
 
 
 
 export const list = async (req, res) => {
     try {
-        const product = await Product.find({}).exec();
+        const product = await Product.find({}).limit("6").sort({ "createAt ": -1 }).exec();
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            error: "Không có sản phẩm"
+        })
+    }
+};
+export const list6 = async (req, res) => {
+    try {
+        const product = await Product.find({}).limit("6").sort({ "createAt ": -1 }).exec();
         res.json(product)
     } catch (error) {
         res.status(400).json({
@@ -48,10 +59,10 @@ export const remove = async (req, res) => {
 };
 //edit product
 export const update = async (req, res) => {
-    const condition = { id: req.params.id }
+    const condition = { _id: req.params.id }
     const update = req.body;
     try {
-        const product = await Product.findOneAndUpdate(condition, update).exec();
+        const product = await Product.findOneAndUpdate(condition, update, { new: true }).exec();
         res.json(product);
     } catch (error) {
         res.status(400).json({
@@ -72,3 +83,29 @@ export const create = async (req, res) => {
         })
     }
 };
+export const search = async (req, res) => {
+    try {
+
+        const conditions = { name: { $regex: req.query.key, $options: "i" } }
+        const products = await Product.find(conditions)
+        res.json(products);
+
+    } catch (error) {
+        res.status(400).json({
+            error: "Không timf được sản phẩm"
+        })
+    }
+};
+// export const search = async (req, res) => {
+//     try {
+
+//         const response = await Product.find({ name: { $regex: req.query.key, $options: 'i' } }).exec();
+//         console.log(req.query)
+//         res.json(response);
+
+//     } catch (error) {
+//         res.status(400).json({
+//             error: "Không timf được sản phẩm"
+//         })
+//     }
+// };
