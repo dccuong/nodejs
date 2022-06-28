@@ -58,7 +58,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/we16310")
     .catch(error => console.log(error))
 
 // connect
-const PORT = 3009;
+const PORT = 8000;
 app.listen(PORT, () => {
     console.log("Server của bạn đang chạy cổng ", PORT);
 });
